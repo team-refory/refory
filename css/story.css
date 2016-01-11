@@ -1,0 +1,156 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+ 
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+ 
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+ 
+/* tables still need 'cellspacing=&quot;0&quot;' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+body{
+    background-color:#e3f9e3;
+}
+
+#header{
+    position: fixed;
+    width:100%;
+    height: 60px;
+    background-color: rgba(255,255,255,0.75);
+}
+
+#header_left{
+    float: left;
+    padding: 0 0 0 30px;
+}
+
+#header_right{
+    float:right;
+    padding: 0 30px 0 0;
+    margin: 3px;
+}
+
+#write{
+    float: right;
+    padding: 10px;
+    background-color: #0cc3a7;
+    margin: 7.5px 10px 15px 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+#fb_login{
+    float: right;
+    padding: 10px;
+    background-color: #305097 ;
+    margin: 7.5px 10px 15px 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+#wrap{
+    width:990px;
+    margin:auto;
+    padding: 60px 0 0 0;
+}
+
+#story{
+    width:700px;
+    float: left;
+    background-color: #fff;
+    padding: 0 10px;
+}
+
+#side{
+    width:260px;
+    float: right;
+}
+
+#story h1{
+    font-size: 2em;
+    padding: 20px;
+    line-height: 1.4em
+}
+
+#story p{
+    line-height: 1.5em
+}
+
+#side a{
+    text-decoration: none;
+}
+
+#profile{
+    background-color: #fff;
+    border-radius: 4px;
+    height: 60px;
+    margin:10px 0;
+}
+
+#fb_img{
+    float: left;
+    margin: 5px 0 10px 10px;
+}
+
+#name{
+    float: right;
+    margin: 23px 70px 20px 10px;
+}
+
+.samewriter_stories{
+    clear: both;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.samewriter_story{
+    color: #0cc3a7;
+}
+
+h3{
+    margin:10px 0;
+}
+
+.latest_stories{
+    clear: both;
+    padding: 10px;
+    margin:10px 0;
+    background-color: #fff;
+}
+
+.latest_story{
+    color: #0cc3a7;
+}
+

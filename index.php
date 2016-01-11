@@ -114,8 +114,8 @@ function h($value) {
     <div class="story">
        <a href="stories/story.php?story_id=<?php echo $story['story_id']; ?>">
         <div class="writer">
-            <p class="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story['fb_id'] . '/picture?type=normal">'; ?></p>
-            <p class="name"><?php echo h($story['name']); ?></p>
+        <p class="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story['fb_id'] . '/picture?type=normal">'; ?></p>
+        <p class="name"><?php echo h($story['name']); ?></p>
         </div>
         <div class="text">
         <h3 class="title"><?php echo h(mb_strimwidth($story['title'], 0, 96, '...', 'UTF-8')); ?></h3>

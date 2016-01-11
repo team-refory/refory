@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require('dbconnect.php');
@@ -40,9 +39,27 @@ $facebook = new Facebook($config);
         }
     }
 
+//投稿を取得する
+$page = $_REQUEST['page'];
+if ($page == '') {
+    $page = 1;
+}
+$page = max($page, 1);
 
-//最新ページを取得する
-$sql = sprintf('SELECT title,thumbnail,article, fb_id, name, story_id FROM stories INNER JOIN users ON stories.writer_id=users.id WHERE published > 0 ORDER BY stories.published DESC LIMIT 0, 8');
+//ページを一定数を取得する
+$sql = 'SELECT COUNT(*) AS cnt FROM stories';
+$recordSet = mysqli_query($db, $sql);
+$table = mysqli_fetch_assoc($recordSet);
+$maxPage = ceil($table['cnt']/ 8);
+$page = min($page, $maxPage);
+
+$start = ($page - 1)*8;
+$start = max(0, $start);
+
+//失敗談を取得する
+$sql = sprintf('SELECT title,thumbnail, article, fb_id, name, story_id FROM stories INNER JOIN users ON stories.writer_id=users.id WHERE published > 0 ORDER BY stories.created DESC LIMIT %d, 8',
+              $start
+              );
 $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 
 
@@ -50,7 +67,6 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 function h($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
-
 ?>
 
 
@@ -58,16 +74,8 @@ function h($value) {
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>失敗談共有サイトrefory</title>
-    <meta name="descpription" content="失敗から得た学びをシェアしよう！失敗談共有サイトrefory（リフォリー）">
-    <meta name="keyword"　content="失敗談,社会人,ビジネスマン,仕事,仕事術,起業">
-    <!--facebookシェア関連-->
-    <meta property=”og:title” content=”失敗談共有サイトrefory” />
-    <meta property=”og:description” content=”失敗から得た学びをシェアしよう！失敗談共有サイトrefory（リフォリー）” />
-    <meta property=”og:url” content=”http://refory.jp/” />
-    <meta property=”og:image” content=”http://refory.jp/img/refory_copy.jpg” />
-   
-    <link href="css/top.css" rel="stylesheet" type="text/css" media="all" />
+    <title>新着の失敗談</title>
+    <link href="css/latest.css" rel="stylesheet" type="text/css" media="all" />
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,10 +88,9 @@ function h($value) {
 </script>
 </head>
 <body>
-
 <div id="header">
     <div id="header_left">
-    <a href="#"><img src="img/refory_logo.png"></a>
+    <a href="index.php"><img src="img/refory_logo.png"></a>
     </div>
     <div id="header_right">
     <?php
@@ -99,36 +106,45 @@ function h($value) {
     ?>
     </div>
 </div>
-
-<div id="copy_img">
-    <img src="img/refory_copy.jpg">
-</div>
-
 <div id="wrap">
 <!-- 新着記事の表示 -->
-<h2>新着ストーリー</h2>
-<div id="stories">
 <?php
     while($story = mysqli_fetch_assoc($stories)):
 ?>
     <div class="story">
-       <a href="stories/story.php?story_id=<?php echo $story['story_id']; ?>">
+       <a href="stories/story.php?story_id=<?php $story['story_id'] ?>">
         <div class="writer">
         <p class="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story['fb_id'] . '/picture?type=normal">'; ?></p>
         <p class="name"><?php echo h($story['name']); ?></p>
         </div>
         <div class="text">
-        <h3 class="title"><?php echo h(mb_strimwidth($story['title'], 0, 96, '...', 'UTF-8')); ?></h3>
-        <!-- <p class="article"><?php echo mb_strimwidth($story['article'], 0, 64, '...', 'UTF-8'); ?></p> -->
+        <h3 class="title"><?php echo mb_strimwidth($story['title'], 0, 66, '...', 'UTF-8'); ?></h3>
+        <p class="article"><?php echo mb_strimwidth($story['article'], 0, 64, '...', 'UTF-8'); ?></p>
         </div>
         </a>
     </div>
 <?php
     endwhile;
 ?>
+
+<div class="paging">
+<?php
+    if ($page > 1) {
+?>
+    <a href="latest.php?page=<?php echo($page - 1); ?>">＜＜前ページ</a>
+<?php
+    }
+?>
+
+<?php
+    if ($page < $maxPage) {
+?>
+    <a href="latest.php?page=<?php echo($page + 1); ?>">次ページ＞＞</a>
+<?php
+    }
+?>
+
 </div>
-<div id="paging">
-<a href="latest.php?page=2">次ページ</a＞
 </div>
 </body>
 </html>
