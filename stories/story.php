@@ -1,48 +1,12 @@
 <?php
 session_start();
+
 require('../dbconnect.php');
 //Facebookクラスのインスタンスの準備
-require_once("../php-sdk/facebook.php");
+require_once('../login/fblogin.php');
+require_once('../security.php');
 
-$config = array(
-    'appId'  => '1653590704887251',
-    'secret' => '98e9267713857adc34e5bc72122008d0'
-);
 
-$facebook = new Facebook($config);
-
-//ログイン済みの場合はユーザー情報を取得
-    if ($facebook->getUser()) {
-        try {
-            $userId = $facebook->getUser();//ログインしたユーザーのID取得
-            $user = $facebook->api('/me','GET');//ユーザーデータを取得する部分
-            //idの抽出
-            $sql_Idcheck = sprintf('SELECT id FROM users WHERE fb_id="'.$userId.'"');
-            $record1 = mysqli_query($db, $sql_Idcheck) or die(mysqli_error($db));
-        $id = mysqli_fetch_assoc($record1);
-            
-            //登録済みか確認
-            $sql_recordcheck = sprintf('SELECT COUNT(*) AS cnt FROM users WHERE fb_id="'.$userId.'"');
-            $record2 = mysqli_query($db, $sql_recordcheck) or die(mysqli_error($db));
-        $table = mysqli_fetch_assoc($record2);
-            if ($table['cnt'] == 0) {
-                //id登録
-                $sql_insert = sprintf('INSERT INTO users SET fb_id="'.$userId.'",name="'.$user['name'].'", created="%s"',
-                      date('Y-m-d H:i:s')
-                      );
-                      mysqli_query($db, $sql_insert) or die(mysqli_error($db));
-            }
-        } catch(FacebookApiException $e) {
-            //取得に失敗したら例外をキャッチしてエラーログに出力
-            error_log($e->getType());
-            error_log($e->getMessage());
-        }
-    }
-
-//htmlspecialcharsのショートカット
-function h($value) {
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-}
 
 //該当ページを取得する
 $story_id = $_GET['story_id'];
@@ -73,6 +37,7 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     <meta charset="UTF-8">
     <title>記事ページ</title>
     <link href="../css/story.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="shortcut icon" href="../img/favicon.ico" />
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -85,25 +50,36 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 </script>
 </head>
 <body>
+
 <div id="header">
-    <div id="header_left">
-    <a href="../index.php"><img src="../img/refory_logo.png"></a>
-    </div>
-    <div id="header_right">
-    <?php
-    if (isset($user)) {
-        //ログイン済みでユーザー情報が取れていれば表示
-        echo '<a href="../profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>';
-        echo '<a id="write" href="write.php?id=' . $id['id'] . '">失敗談を書こう</a>';
-        } else {
-        //未ログインならログイン URL を取得してリンクを出力
-        $loginUrl = $facebook->getLoginUrl();
-        echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
-        }
-    ?>
-    </div>
+   
+        <div id="header_left">
+            <a href="../index.php"><img src="img/logo-width.png" alt="refory" class="refory_logo_new"></p></a>
+        </div>
+        <div id="header_right">
+            <?php
+            if (isset($user)) { ?>
+                <!--ログイン済みでユーザー情報が取れていれば表示 -->
+            <div class="fb_img-header">
+                <p class="fb_img-header"><?php echo '<a href="../profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>'; ?></p>
+            </div>
+                <div class="write">
+                <?php echo '<a class="write" href="write.php?id=' .$id['id'] . '">失敗談を書こう</a>'; ?>
+            <?php } else { ?>
+                <!--未ログインならログイン URL を取得してリンクを出力 -->
+                <?php
+                $loginUrl = $facebook->getLoginUrl();
+                echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+                }
+            ?>
+            </div>
+        </div>
+    
 </div>
+
 <div id="wrap">
+    <div id="contents">
+    <?php include '../sns.php' ; ?>
     <div id="story">
             <h1><?php echo h($story_data['title']); ?></h1>
             <!-- <p><?php echo ('<img src="../img/' . $story_data['thumbnail'] . '" />'); ?></p> -->
@@ -117,31 +93,52 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
         </div>
             <h3>この人の他の失敗談</h3>
             <div class="samewriter_stories">
-            <?php
-                while($stories = mysqli_fetch_assoc($samewriter_stories)):
-            ?>
-            <a class="samewriter_story" href="story.php?story_id=<?php echo $stories['story_id']; ?>">
-            <p><?php echo mb_strimwidth($stories['title'], 0, 55, '...', 'UTF-8'); ?></p>
-            <!-- <p><?php echo h($stories['thumbnail']); ?></p> -->
-            </a>
-            <?php
-            endwhile;
-            ?>
-        </div>
+                <?php
+                    while($stories = mysqli_fetch_assoc($samewriter_stories)):
+                ?>
+                <a class="samewriter_story" href="story.php?story_id=<?php echo $stories['story_id']; ?>">
+                <p><?php echo mb_strimwidth($stories['title'], 0, 55, '...', 'UTF-8'); ?></p>
+                <!-- <p><?php echo h($stories['thumbnail']); ?></p> -->
+                </a>
+                <?php
+                    endwhile;
+                ?>
+            </div>
             <h3>新着の失敗談</h3>
             <div class="latest_stories">
-            <?php
-                while($stories = mysqli_fetch_assoc($latest_stories)):
-            ?>
-            <a class="latest_story" href="story.php?story_id=<?php echo $stories['story_id']; ?>">
-            <p><?php echo mb_strimwidth($stories['title'], 0, 55, '...', 'UTF-8'); ?></p>
-            <!-- <p><?php echo h($stories['thumbnail']); ?></p> -->
-            </a>
-            <?php
-            endwhile;
-            ?>
-        </div>
+                <?php
+                    while($stories = mysqli_fetch_assoc($latest_stories)):
+                ?>
+                <a class="latest_story" href="story.php?story_id=<?php echo $stories['story_id']; ?>">
+                <p><?php echo mb_strimwidth($stories['title'], 0, 55, '...', 'UTF-8'); ?></p>
+                <!-- <p><?php echo h($stories['thumbnail']); ?></p> -->
+                </a>
+                <?php
+                    endwhile;
+                ?>
+            </div>
+            <div class = 'count_pv'>
+                <iframe src="../count/count.php" height="70" width="140" frameborder="0" scrolling="no"></iframe>
+            </div>
     </div>
+    </div>
+    <section id = "comment_area">
+        <div class = "refory_story_comment">
+            <h1>感想</h1>
+                <div class = "comment_contents">
+                    <form action="" method="post" id="testForm" onsubmit="">
+                        <textarea class="comment" name="comment" rows="5" cols="30" placeholder="感想を投稿する..." style="height: 20px;overflow: hidden;word-wrap: break-word;resize: horizontal;"></textarea>
+                    </form>
+                </div>
+        </div>
+    </section>
+    
+</div>
+<div class = "footer">
+    <div class="footer_left">
+        <a href="../index.php"><img src="../img/refory_logo.png"></a>
+    </div>
+        <p class="copylight">2016 © refory.jp</p>
 </div>
 </body>
 </html>

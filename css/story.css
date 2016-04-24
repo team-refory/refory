@@ -1,4 +1,12 @@
-html, body{
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -6,9 +14,16 @@ html, body{
 	font-size: 100%;
 	vertical-align: baseline;
 	background: transparent;
+	font-family:HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
+}
+html {
+    height:100%;
 }
 body {
 	line-height: 1;
+	font-family:HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
+	background-color:#e3f9e3;
+	height:100%;
 }
 ol, ul {
 	list-style: none;
@@ -21,7 +36,7 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
- 
+
 /* remember to define focus styles! */
 :focus {
 	outline: 0;
@@ -44,11 +59,48 @@ body{
     background-color:#e3f9e3;
 }
 
+
 #header{
-    position: fixed;
     width:100%;
     height: 60px;
     background-color: rgba(255,255,255,0.75);
+    z-index:100;
+}
+
+#header_left{
+    float: left;
+    padding: 0 0 0 30px;
+}
+
+#header_right{
+    display:none;
+}
+.refory_logo_new{
+    width: 179px;
+    height: 54px;
+    float: left;
+    margin-left: 70px;
+}
+.fb_img img{
+    width:68px;
+    height:68px;
+    /*padding: 20px 5px 10px 15px;*/
+    border-radius:50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    background-size: cover;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+@media (min-width: 780px) {
+
+#header{
+    position: fixed;
+    width:100%;
+    min-width:760px;
+    height: 60px;
+    background-color: rgba(255,255,255,0.75);
+    z-index:100;
 }
 
 #header_left{
@@ -60,17 +112,42 @@ body{
     float:right;
     padding: 0 30px 0 0;
     margin: 3px;
+    width:213px;
+    display:block;
+}
+#header_right .fb_img-header {
+    width: 49px;
+    float: left;
+    margin-top: 1px;
+    margin-left: 8px;
+}
+#header_right .fb_img-header img{
+    width:40px;
+    height:40px;
+    display: inline-block;
+    border-radius:50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    background-size: cover;
+    right:180px;
+    top:6px;
+    vertical-align:middle;
 }
 
-#write{
+#header_right .write .write{
     float: right;
     padding: 10px;
     background-color: #0cc3a7;
     margin: 7.5px 10px 15px 10px;
     text-decoration: none;
     color: #fff;
+    border-radius: 3px;
 }
-
+.refory_logo_new{
+    width: 179px;
+    height: 54px;
+    float: left;
+    margin-left: 70px;
+}
 #fb_login{
     float: right;
     padding: 10px;
@@ -80,12 +157,55 @@ body{
     color: #fff;
 }
 
-#wrap{
-    width:990px;
+#copy_img{
+    clear: both;
+    width:100%;
+    height:auto;
     margin:auto;
     padding: 60px 0 0 0;
 }
+#copy_img img{
+    width:100%;
+    height:auto;
+}
+#profile img{
+    width:40px;
+    height:40px;
+    display: inline-block;
+    border-radius:50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    background-size: cover;
+    right:180px;
+    top:6px;
+    vertical-align:middle;
+}
 
+/*#wrap{*/
+    
+/*    width:990px;*/
+/*    margin:auto;*/
+/*    padding: 60px 0 0 0;*/
+/*}*/
+
+#wrap{
+    width:100%;
+    height:auto !important;
+    height:100%;
+    position:relative;
+    /*margin:auto;*/
+    /*padding:40px;*/
+}
+
+#contents{
+    width:990px;
+    min-height:780px;
+    margin:0 auto;
+    padding-top:60px;
+    padding-bottom:100px;
+    clear: both;
+    content: "";
+    display: table;
+}
 #story{
     width:700px;
     float: left;
@@ -106,6 +226,15 @@ body{
 
 #story p{
     line-height: 1.5em
+}
+#story p img {
+    max-width: 548px;
+    max-height: 500px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    outline: 1px solid #CCC;
+    border: 4px solid #FCFCFC;
 }
 
 #side a{
@@ -154,3 +283,133 @@ h3{
     color: #0cc3a7;
 }
 
+
+.footer{
+    width:100%;
+    min-width:760px;
+    height:100px;
+    background-color: rgba(255,255,255,0.75);
+    position:absolute;
+    bottom:auto;
+}
+.footer_left{
+    float: left;
+    padding: 25px 0 0 30px;
+}
+.footer p {
+    padding: 0;
+    margin-bottom: 0px;
+    font-size: 15px;
+    text-align: center;
+    position: relative;
+    top: 50px;
+    right: 130px;
+}
+.share{
+	width:100%;
+}
+.share h4{
+	font-size:120%;
+	text-align:center;
+}
+
+.sns{
+	margin:0 auto;
+	text-align:center;
+
+}
+.sns ul {
+	list-style:none;
+
+}
+.sns li {
+	float:left;
+	width:23%;
+	margin:2% 2% 2% 0;
+}
+.sns li a {
+	font-size:80%;
+	position:relative;
+	display:block;
+	padding:10px;
+	color:#fff;
+	border-radius:6px;
+	text-align:center;
+	text-decoration: none;
+	text-shadow:1px 1px 0 rgba(255,255,255,0.3);
+}
+
+
+/* ツイッター */
+.sns .twitter a {
+	background:#00acee;
+}
+.sns  .twitter a:hover {
+	background:#0092ca;
+}
+
+/* Facebook */
+.sns  .facebook a {
+	background:#3b5998;
+}
+.sns .facebook a:hover {
+	background:#2c4373;
+}
+/* はてぶ */
+.sns  .hatebu a {
+	background:#5d8ac1;
+
+}
+.sns .hatebu a:hover {
+	background:#43638b;
+}
+.sns p {
+    text-align: center;
+}
+.sns img {
+    width: 18px;
+}
+.count_pv{
+    display: none;
+}
+#comment_area {
+    height: 200px;
+}
+#comment_area .refory_story_comment {
+    margin: 0 auto;
+    width: 990px;
+    min-height: 40px;
+    clear: both;
+    content: "";
+    display: table;
+}
+#comment_area .comment_contents {
+    float: left;
+    padding: 10px 15px 20px 15px;
+    width: 517px;
+    min-height: 36px;
+    border: 1px solid rgba(0,0,0,0.11);
+    position: relative;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    -moz-box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0,0,0,0.05)), color-stop(100%, rgba(255,255,255,0.05)));
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.05) 0%,rgba(255,255,255,0.05) 100%);
+}
+textarea.comment {
+    width: 500px
+}
+}

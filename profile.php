@@ -1,49 +1,12 @@
 <?php
 session_start();
 require('dbconnect.php');
-
-//Facebookクラスのインスタンスの準備
-require_once("php-sdk/facebook.php");
-
-//htmlspecialcharsのショートカット
-function h($value) {
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-}
-
-$config = array(
-    'appId'  => '1653590704887251',
-    'secret' => '98e9267713857adc34e5bc72122008d0'
-);
-
-$facebook = new Facebook($config);
-$userId = $facebook->getUser();
-$user = $facebook->api('/me','GET');
+require_once('login/fblogin.php');
+require_once('editer.php');
+require_once('security.php');
 
 
-//直アクセスのリダイレクト
-if (!isset($userId)) {
-    header('Location: http://refory.jp');
-    }
-
-
-//writer_idを抽出する 
-$sql = sprintf('SELECT id FROM users WHERE fb_id="'.$userId.'"');
-$user_data = mysqli_query($db, $sql) or die(mysqli_error($db));
-$user_profile = mysqli_fetch_assoc($user_data);
-
-//同じライターの公開済みの記事を取得する
-$sql = sprintf('SELECT title, thumbnail, story_id FROM stories WHERE (writer_id = %d) AND (published > 0)',
-              $user_profile['id']
-              );
-$written_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
-
-//同じライターの下書きの記事を取得する
-$sql = sprintf('SELECT title, thumbnail, story_id FROM stories WHERE (writer_id = %d) AND (published = 0)',
-              $user_profile['id']
-              );
-$writing_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -51,26 +14,34 @@ $writing_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     <meta charset="UTF-8">
     <title>mypage</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
 </head>
 <body>
 <div id="header">
-    <div id="header_left">
-    <a href="index.php"><img src="img/refory_logo.png"></a>
+   
+        <div id="header_left">
+            <a href="../index.php"><img src="img/logo-width.png" alt="refory" class="refory_logo_new"></p></a>
+        </div>
+        <div id="header_right">
+        <?php
+        if (isset($user)) { ?>
+            <!--ログイン済みでユーザー情報が取れていれば表示 -->
+            <div class="fb_img-header">
+                <p class="fb_img-header"><?php echo '<a href="profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>'; ?></p>
+            </div>
+            <div class="write">
+            <?php echo '<a class="write" href="stories/write.php?id=' . $id['id'] . '">失敗談を書こう</a>'; ?>
+        <?php } else { ?>
+            <!--未ログインならログイン URL を取得してリンクを出力 -->
+            <?php
+            $loginUrl = $facebook->getLoginUrl();
+            echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+            }
+        ?>
+            </div>
+        </div>
+    
     </div>
-    <div id="header_right">
-    <?php
-    if (isset($user)) {
-        //ログイン済みでユーザー情報が取れていれば表示
-        echo '<a href="profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>';
-        echo '<a id="write" href="stories/write.php?id=' . $user_profile['id'] . '">失敗談を書こう</a>';
-        } else {
-        //未ログインならログイン URL を取得してリンクを出力
-        $loginUrl = $facebook->getLoginUrl();
-        echo '<a href="' . $loginUrl . '">Login with Facebook</a>';
-        }
-    ?>
-    </div>
-</div>
 
 <div id="wrap">
     <div class="written_stories">

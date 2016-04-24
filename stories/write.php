@@ -1,50 +1,9 @@
 <?php
 session_start();
 require('../dbconnect.php');
-/* ログインしてないで直アクセスした際のリダイレクト
-if (empty($_GET['id'])){
-    header('Location: http://refory.jp/index.php');
-    exit();
-}
-*/
-
 //Facebookクラスのインスタンスの準備
-require_once("../php-sdk/facebook.php");
-
-$config = array(
-    'appId'  => '1653590704887251',
-    'secret' => '98e9267713857adc34e5bc72122008d0'
-);
-
-$facebook = new Facebook($config);
-
-//ログイン済みの場合はユーザー情報を取得
-    if ($facebook->getUser()) {
-        try {
-            $userId = $facebook->getUser();//ログインしたユーザーのID取得
-            $user = $facebook->api('/me','GET');//ユーザーデータを取得する部分
-            //idの抽出
-            $sql_Idcheck = sprintf('SELECT id FROM users WHERE fb_id="'.$userId.'"');
-            $record1 = mysqli_query($db, $sql_Idcheck) or die(mysqli_error($db));
-        $id = mysqli_fetch_assoc($record1);
-            
-            //登録済みか確認
-            $sql_recordcheck = sprintf('SELECT COUNT(*) AS cnt FROM users WHERE fb_id="'.$userId.'"');
-            $record2 = mysqli_query($db, $sql_recordcheck) or die(mysqli_error($db));
-        $table = mysqli_fetch_assoc($record2);
-            if ($table['cnt'] == 0) {
-                //id登録
-                $sql_insert = sprintf('INSERT INTO users SET fb_id="'.$userId.'",name="'.$user['name'].'", created="%s"',
-                      date('Y-m-d H:i:s')
-                      );
-                      mysqli_query($db, $sql_insert) or die(mysqli_error($db));
-            }
-        } catch(FacebookApiException $e) {
-            //取得に失敗したら例外をキャッチしてエラーログに出力
-            error_log($e->getType());
-            error_log($e->getMessage());
-        }
-    }
+require_once('../login/fblogin.php');
+require_once('../security.php');
 
 
 //下書きを編集する
@@ -97,8 +56,8 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
                           );
         }
         mysqli_query($db, $sql) or die(mysqli_error($db));
-        /*
-        header('Location:  http://refory.jp/index.php');  //投稿の重複を防ぐために再度同じページを開かせている
+        /*ページ遷移
+        header('Location:  http://localhost/refory/index.php');  //投稿の重複を防ぐために再度同じページを開かせている
         exit();
         */
         
@@ -108,58 +67,57 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>失敗談作成</title>
-      <!-- include jquery -->
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> 
 
-  <!-- include libraries BS3 -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" />
-  <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-
-  <!-- include summernote -->
-  <link rel="stylesheet" href="../dist/summernote.css">
-  <script type="text/javascript" src="../dist/summernote.js"></script>
-
-  <script type="text/javascript">
-    $(function() {
-      $('.summernote').summernote({
-        height: 200
-      });
-/*　★なんかエラーを返していそう
-      $('form').on('submit', function (e) {
-        e.preventDefault();
-        alert($('.summernote').code());
-      });
-*/
-    });
-  </script>
   <link href="../css/write.css" rel="stylesheet" type="text/css" media="all" />
+  <link rel="shortcut icon" href="../img/favicon.ico" />
+<script src="jquery.min.js" type="text/javascript"></script>
+  <script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    CKEDITOR.config.toolbar = [
+['Bold','Strike']
+,['Format']
+
+];
+    </script>
+
+ <style type="text/css">
+a {
+	color: #03f;
+	text-decoration: underline;
+}
+</style>
+  
+  
 </head>
 <body>
 <div id="header">
-    <div id="header_left">
-    <a href="../index.php"><img src="../img/refory_logo.png"></a>
+        <div id="header_left">
+            <a href="../index.php"><img src="img/logo-width.png" alt="refory" class="refory_logo_new"></p></a>
+        </div>
+        <div id="header_right">
+            <?php
+            if (isset($user)) { ?>
+                <!--ログイン済みでユーザー情報が取れていれば表示 -->
+            <div class="fb_img-header">
+                <p class="fb_img-header"><?php echo '<a href="../profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>'; ?></p>
+            </div>
+                <div class="write">
+                <?php echo '<a class="write" href="write.php?id=' .$id['id'] . '">失敗談を書こう</a>'; ?>
+            <?php } else { ?>
+                <!--未ログインならログイン URL を取得してリンクを出力 -->
+                <?php
+                $loginUrl = $facebook->getLoginUrl();
+                echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+                }
+            ?>
+            </div>
+        </div>
     </div>
-    <div id="header_right">
-    <?php
-    if (isset($user)) {
-        //ログイン済みでユーザー情報が取れていれば表示
-        echo '<a href="../profile.php"><img src="https://graph.facebook.com/' . $userId . '/picture"></a>';
-        echo '<a id="write" href="write.php?id=' . $id['id'] . '">失敗談を書こう</a>';
-        } else {
-        //未ログインならログイン URL を取得してリンクを出力
-        $loginUrl = $facebook->getLoginUrl();
-        echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
-        }
-    ?>
-    </div>
-</div>
    
     <div id="wrap">
     <form action="" method="post" enctype="multipart/form-data">
@@ -180,11 +138,23 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
                 <?php endif; ?>
             </dd>
             -->
-            <dt>本文</dt>
-            <dd>
-                <textarea name="article" class="summernote" id="contents" required="required" title="Contents"><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
-            </dd>
-        </dl>
+        
+        <div id="container">
+
+
+
+<h1>本文</h1>
+<form action="" method="post" id="testForm" onsubmit="">
+<textarea name="article" class="ckeditor"><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
+</form>
+
+
+
+</div>
+       
+       
+       
+        
         <div>
             <input type="submit" name="action" value="更新する" />
             <input type="submit" name="action" value="下書き保存する" />
@@ -193,5 +163,6 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
         </div>
     </form>
     </div>
+
 </body>
 </html>

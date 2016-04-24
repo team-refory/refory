@@ -1,0 +1,59 @@
+@media (min-width: 780px) {
+
+#header{
+    position: fixed;
+    width:100%;
+    min-width:760px;
+    height: 60px;
+    background-color: rgba(255,255,255,0.75);
+    z-index:100;
+}
+
+#header_left{
+    float: left;
+    padding: 0 0 0 30px;
+}
+
+#header_right{
+    float:right;
+    padding: 0 30px 0 0;
+    margin: 3px;
+    width:213px;
+}
+#header_right .fb_img-header {
+    width: 49px;
+    float: left;
+    margin-top: 1px;
+    margin-left: 8px;
+}
+#header_right .fb_img-header img{
+    width:40px;
+    height:40px;
+    display: inline-block;
+    border-radius:50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    background-size: cover;
+    right:180px;
+    top:6px;
+    vertical-align:middle;
+}
+
+#header_right .write .write{
+    float: right;
+    padding: 10px;
+    background-color: #0cc3a7;
+    margin: 7.5px 10px 15px 10px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+}
+
+#fb_login{
+    float: right;
+    padding: 10px;
+    background-color: #305097 ;
+    margin: 7.5px 10px 15px 10px;
+    text-decoration: none;
+    color: #fff;
+}
+}
