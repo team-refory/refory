@@ -45,6 +45,7 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     <meta property=”og:description” content=”失敗から得た学びをシェアしよう！失敗談共有サイトrefory（リフォリー）” />
     <meta property=”og:url” content=”http://refory.jp/” />
     <meta property=”og:image” content=”http://refory.jp/img/refory_copy.jpg” />
+    <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
     <link rel="shortcut icon" href="img/favicon.ico" />
     <link href="css/top.css" rel="stylesheet" type="text/css" media="all" />
     <script>
@@ -123,8 +124,10 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
         
     </div>
     <div id="next">
-        <a href="latest.php?page=<?php echo($page+1); ?>" class = "button">次の記事を表示！</a>
-        <img id="loading" src="/img/icon_loading.gif" alt="読み込み中"  width="29" height="29">
+
+            <a href="latest.php?page=<?php echo($page+1); ?>" class = "button">次の記事を表示！</a>
+            <img id="loading" src="/img/icon_loading.gif" alt="読み込み中"  width="29" height="29">
+        </div>
     </div>
 </div>  
         

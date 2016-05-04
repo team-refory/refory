@@ -372,6 +372,43 @@ h3{
 .count_pv{
     display: none;
 }
+.comment_list_area {
+    height: 200px;
+}
+.comment_list_area {
+    margin: 0 auto;
+    width: 990px;
+    min-height: 40px;
+    clear: both;
+    content: "";
+    display: table;
+}
+.comment_list_area .comment_list {
+    float: left;
+    padding: 10px 15px 20px 15px;
+    width: 517px;
+    min-height: 36px;
+    border: 1px solid rgba(0,0,0,0.11);
+    position: relative;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    -moz-box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    box-shadow: 0 0 7px rgba(0,0,0,0.06);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0,0,0,0.05)), color-stop(100%, rgba(255,255,255,0.05)));
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.05) 0%,rgba(255,255,255,0.05) 100%);
+}
 #comment_area {
     height: 200px;
 }

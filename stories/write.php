@@ -79,7 +79,8 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
   <script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
     <script type="text/javascript">
     CKEDITOR.config.toolbar = [
-['Bold','Strike']
+['Bold','Strike'],
+['CreatePlaceholder']
 ,['Format']
 
 ];
@@ -147,7 +148,6 @@ a {
 <form action="" method="post" id="testForm" onsubmit="">
 <textarea name="article" class="ckeditor"><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
 </form>
-
 
 
 </div>

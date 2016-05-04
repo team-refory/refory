@@ -6,8 +6,6 @@ require('../dbconnect.php');
 require_once('../login/fblogin.php');
 require_once('../security.php');
 
-
-
 //該当ページを取得する
 $story_id = $_GET['story_id'];
 $sql = sprintf('SELECT title, article, thumbnail, writer_id, fb_id, name, introduce FROM stories INNER JOIN users ON stories.writer_id=users.id WHERE story_id=%d',
@@ -27,6 +25,8 @@ $samewriter_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 //新着ストーリーを取得する
 $sql = sprintf('SELECT title,thumbnail,article, fb_id, name, story_id FROM stories INNER JOIN users ON stories.writer_id=users.id WHERE published > 0 ORDER BY stories.published DESC LIMIT 0, 8');
 $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
+
+
 
 ?>
 
@@ -48,6 +48,7 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
   ga('send', 'pageview');
 
 </script>
+
 </head>
 <body>
 
@@ -85,6 +86,7 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
             <!-- <p><?php echo ('<img src="../img/' . $story_data['thumbnail'] . '" />'); ?></p> -->
             <p><?php echo $story_data['article']; ?></p>
     </div>
+    <div id="btn01"><p><a href="javascript:void(0);">いいね！</a></p><span></span></div>
     <div id="side">
         <div id="profile">
             <p id="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story_data['fb_id'] . '/picture">'; ?></p>
@@ -122,16 +124,21 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
             </div>
     </div>
     </div>
-    <section id = "comment_area">
-        <div class = "refory_story_comment">
-            <h1>感想</h1>
-                <div class = "comment_contents">
-                    <form action="" method="post" id="testForm" onsubmit="">
-                        <textarea class="comment" name="comment" rows="5" cols="30" placeholder="感想を投稿する..." style="height: 20px;overflow: hidden;word-wrap: break-word;resize: horizontal;"></textarea>
-                    </form>
-                </div>
-        </div>
-    </section>
+     <div>
+        <form id="comment_form">
+                <div class="comments_wrapper">
+    			</div>
+    			<div class="new_post_wrapper">
+    				
+    				<textarea class="comment_insert_text" name="comment" value="" rows="5" cols="30" placeholder="感想をおくる..." style="height: 20px;overflow: hidden;word-wrap: break-word;resize: horizontal;"></textarea>
+    				<input type="button" id="send-comment" value="おくる" />
+    			</div>
+    			
+    			<textarea class="comment_story_id" name="story_id" value="" rows="5" cols="30" style="display: none;"><?php echo $story_id ?></textarea>
+    			<textarea class="comment_user_id" name="user_id" value="" rows="5" cols="30" style="display: none;"><?php echo $userId ?></textarea>
+    	</form>
+        
+    </div>
     
 </div>
 <div class = "footer">
@@ -140,5 +147,10 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     </div>
         <p class="copylight">2016 © refory.jp</p>
 </div>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="js/jquery-2.1.4..min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/comment.js"></script>
+<script type="text/javascript" src="js/count.js"></script>
 </body>
 </html>
