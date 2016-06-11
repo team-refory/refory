@@ -5,6 +5,8 @@ require('../dbconnect.php');
 //Facebookクラスのインスタンスの準備
 require_once('../login/fblogin.php');
 require_once('../security.php');
+require_once('view_count.php');
+require_once('like_count.php');
 
 //該当ページを取得する
 $story_id = $_GET['story_id'];
@@ -26,6 +28,11 @@ $samewriter_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 $sql = sprintf('SELECT title,thumbnail,article, fb_id, name, story_id FROM stories INNER JOIN users ON stories.writer_id=users.id WHERE published > 0 ORDER BY stories.published DESC LIMIT 0, 8');
 $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 
+//count access
+
+$counter = new ViewCounter();
+
+$count = $counter->log( $story_id );
 
 
 ?>
@@ -82,11 +89,11 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     <div id="contents">
     <?php include '../sns.php' ; ?>
     <div id="story">
-            <h1><?php echo h($story_data['title']); ?></h1>
-            <!-- <p><?php echo ('<img src="../img/' . $story_data['thumbnail'] . '" />'); ?></p> -->
-            <p><?php echo $story_data['article']; ?></p>
+        <h1><?php echo h($story_data['title']); ?></h1>
+        <!-- <p><?php echo ('<img src="../img/' . $story_data['thumbnail'] . '" />'); ?></p> -->
+        <p><?php echo $story_data['article']; ?></p>
     </div>
-    <div id="btn01"><p><a href="javascript:void(0);">いいね！</a></p><span></span></div>
+    <!--<div id="btn01"><p><a href="javascript:void(0);">いいね！</a></p><span></span></div>-->
     <div id="side">
         <div id="profile">
             <p id="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story_data['fb_id'] . '/picture">'; ?></p>
@@ -119,26 +126,30 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
                     endwhile;
                 ?>
             </div>
-            <div class = 'count_pv'>
-                <iframe src="../count/count.php" height="70" width="140" frameborder="0" scrolling="no"></iframe>
-            </div>
+            <!--<div class = 'count_pv'>-->
+            <!--    <iframe src="../count/count.php" height="70" width="140" frameborder="0" scrolling="no"></iframe>-->
+            <!--</div>-->
     </div>
-    </div>
-     <div>
-        <form id="comment_form">
-                <div class="comments_wrapper">
-    			</div>
+        <div id="comment_area">
+            
+            <div class="comments_wrapper">
+			</div>
+        	<form id="comment_form">
     			<div class="new_post_wrapper">
-    				
-    				<textarea class="comment_insert_text" name="comment" value="" rows="5" cols="30" placeholder="感想をおくる..." style="height: 20px;overflow: hidden;word-wrap: break-word;resize: horizontal;"></textarea>
-    				<input type="button" id="send-comment" value="おくる" />
-    			</div>
+    				<div class="new_post_content">
+    				    <textarea class="comment_insert_text" name="comment" value="" rows="5" cols="30" placeholder="感想をおくる..." style="height: 40px;overflow: hidden;word-wrap: break-word;resize: horizontal;"></textarea>
+    				    <input type="button" id="send-comment" value="おくる" />
+    				    
+    				</div>
     			
+    			</div>
     			<textarea class="comment_story_id" name="story_id" value="" rows="5" cols="30" style="display: none;"><?php echo $story_id ?></textarea>
     			<textarea class="comment_user_id" name="user_id" value="" rows="5" cols="30" style="display: none;"><?php echo $userId ?></textarea>
-    	</form>
-        
+        	</form>
+        	
+        </div>
     </div>
+     
     
 </div>
 <div class = "footer">
@@ -151,6 +162,7 @@ $latest_stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="js/jquery-2.1.4..min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/comment.js"></script>
+<script type="text/javascript" src="js/autoResize.js"></script>
 <script type="text/javascript" src="js/count.js"></script>
 </body>
 </html>

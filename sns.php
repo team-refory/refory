@@ -27,7 +27,7 @@ $url = ($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
 
 <!--はてブボタン-->
 <li class="hatebu">
-<a href="http://b.hatena.ne.jp/add?mode=confirm&url=<?php echo urlencode($url); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=510');return false;" ><i class="fa fa-hatena"></i><img alt="はてぶボタン" src="img/hatebu.png"><p>はてブ</p></a>
+<a href="http://b.hatena.ne.jp/add?mode=confirm&url=<?php echo $url; ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=510');return false;" ><i class="fa fa-hatena"></i><img alt="はてぶボタン" src="img/hatebu.png"><p>はてブ</p></a>
 </li>
 
 </ul>

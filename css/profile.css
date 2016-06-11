@@ -126,6 +126,8 @@ a{
     font-size: 1.2em;
     padding: 5px 0;
     margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .writing_stories{
@@ -137,7 +139,13 @@ a{
 }
 
 .edit{
-    padding: 3px;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
     background-color: #0cc3a7;
     margin: 0 0 0 30px;
     text-decoration: none;
@@ -203,6 +211,11 @@ a{
     height:40px;
     display: inline-block;
     border-radius:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -khtml-border-radius: 50%;
     border: 3px solid rgba(255,255,255,0.6);
     background-size: cover;
     right:180px;

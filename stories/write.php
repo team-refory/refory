@@ -5,6 +5,7 @@ require('../dbconnect.php');
 require_once('../login/fblogin.php');
 require_once('../security.php');
 
+$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 
 //下書きを編集する
 if (!empty($_GET['story_id'])) {
@@ -32,25 +33,25 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
         move_uploaded_file($_FILES['thumbnail']['tmp_name'], '../img/' . $thumbnail);
         */
         //投稿をdbに保存
-        if ($_POST['action'] == '公開する') {
+        if ($_POST['action'] == '公開') {
             $sql = sprintf('INSERT INTO stories SET writer_id=%d,title="%s", article="%s", created=NOW(), published=NOW()',
                            mysqli_real_escape_string($db, $_GET['id']),
                            mysqli_real_escape_string($db, $_POST['title']),
                            mysqli_real_escape_string($db, $_POST['article'])
                           );
-        } else if ($_POST['action'] == '下書き保存する') {
+        } else if ($_POST['action'] == '下書き保存') {
             $sql = sprintf('INSERT INTO stories SET writer_id=%d,title="%s", article="%s", created=NOW()',
                            mysqli_real_escape_string($db, $_GET['id']),
                            mysqli_real_escape_string($db, $_POST['title']),
                            mysqli_real_escape_string($db, $_POST['article'])
                           );
-        } else if ($_POST['action'] == '更新する') {
+        } else if ($_POST['action'] == '更新') {
             $sql = sprintf('UPDATE stories SET title="%s", article="%s" WHERE story_id=%d',
                            mysqli_real_escape_string($db, $_POST['title']),
                            mysqli_real_escape_string($db, $_POST['article']),
                            mysqli_real_escape_string($db, $_GET['story_id'])
                           );
-        } else if ($_POST['action'] == '削除する') {
+        } else if ($_POST['action'] == '削除') {
             $sql = sprintf('DELETE FROM stories WHERE story_id=%d',
                            mysqli_real_escape_string($db, $_GET['story_id'])
                           );
@@ -79,12 +80,17 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
   <script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
     <script type="text/javascript">
     CKEDITOR.config.toolbar = [
-['Bold','Strike'],
-['CreatePlaceholder']
-,['Format']
-
-];
+    ['Bold','Strike']
+    ,['Format']
+    ,['CreatePlaceholder']
+    ];
+    CKEDITOR.config.height = '500px';
+    CKEDITOR.config.placeholder = 'Type here...';
+    CKEDITOR.replace( '.ckeditor', {
+			extraPlugins: 'placeholder'
+			});
     </script>
+
 
  <style type="text/css">
 a {
@@ -121,48 +127,73 @@ a {
     </div>
    
     <div id="wrap">
-    <form action="" method="post" enctype="multipart/form-data">
-        <dl>
-            <dt>タイトル</dt>
-            <dd>
-                <textarea name="title" cols=64 rows=1><?php if (!empty($writing_title)): ?><?php echo $writing_title; ?><?php endif; ?></textarea>
-            </dd>
-            <!--
-            <dt>サムネイル</dt>
-            <dd>
-                <input type="file" name="thumbnail" size="50"/>
-                <?php if (!empty($error) && $error['thumbnail'] == 'type'): ?>
-                <p class="error">サムネイルはgifまたはjpg、pngの画像を指定してください</p>
-                <?php endif; ?>
-                <?php if (!empty($_GET['story_id'])): ?>
-                <p class="error">恐れ入りますが改めてサムネイルを指定してください</p>
-                <?php endif; ?>
-            </dd>
-            -->
+    <div id="container">
         
-        <div id="container">
-
-
-
-<h1>本文</h1>
-<form action="" method="post" id="testForm" onsubmit="">
-<textarea name="article" class="ckeditor"><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
-</form>
-
-
-</div>
-       
-       
-       
+        <div class="white-board">
+            <form id="editorBottun">
+                <ul style="list-style:none;">
+                   <li><input type="button" id="decoBold" value="太文字"/></li>
+                   <li><input type="button" id="decoStrike" value="取消線"/></li>
+                   <li><input type="button" id="decoH3" value="見出し"/></li>
+                </ul>
+            </form>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="post-title">
+                    <textarea name="title" placeholder="タイトル..." style="overflow: hidden; word-wrap: break-word; resize: none;" ><?php if (!empty($writing_title)): ?><?php echo $writing_title; ?><?php endif; ?></textarea>
+                </div>
+                <!--
+                <dt>サムネイル</dt>
+                <dd>
+                    <input type="file" name="thumbnail" size="50"/>
+                    <?php if (!empty($error) && $error['thumbnail'] == 'type'): ?>
+                    <p class="error">サムネイルはgifまたはjpg、pngの画像を指定してください</p>
+                    <?php endif; ?>
+                    <?php if (!empty($_GET['story_id'])): ?>
+                    <p class="error">恐れ入りますが改めてサムネイルを指定してください</p>
+                    <?php endif; ?>
+                </dd>
+                -->
         
-        <div>
-            <input type="submit" name="action" value="更新する" />
-            <input type="submit" name="action" value="下書き保存する" />
-            <input type="submit" name="action" value="公開する" />
-            <input type="submit" name="action" value="削除する" />
+    
+            <form action="" method="post" id="testForm" onsubmit="">
+            <textarea name="ckeditor" class="ckeditor" ><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
+            
         </div>
-    </form>
+    
+            <div class = "footer">
+                <div class="function-area">
+                    <ul style="list-style:none;">
+                        <!--<li><input type="submit" class="release_button" name="action" value="削除" /></li>-->
+                        <li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>
+                        <li><input type="submit" class="save_button" name="action" value="下書きを保存" /></li>
+                    <?php
+                        if (preg_match("|^https?://refory\.jp\/profile\.php|", $referer)) {
+                           // マイページからの遷移した場合の処理
+                            echo '<li><input type="submit" class="update_button" name="action" value="更新" /></li>';
+                            echo '<li><input type="submit" class="release_button" name="action" value="公開" /></li>';
+                        }
+                        else {
+                         /* 直接アクセス時の処理 */
+                         echo '<li><input type="submit" class="release_button" name="action" value="公開" /></li>';
+                        }
+                    ?>
+                        
+                    </ul>
+                </div>
+            </div>
+            </form>
+        </div>
     </div>
-
+<script>
+   document.getElementById('decoBold').onclick = function(){
+       document.getElementById('cke_13').click();
+   };
+   document.getElementById('decoStrike').onclick = function(){
+       document.getElementById('cke_14').click();
+   };
+   document.getElementById('decoH3').onclick = function(){
+       document.getElementById('cke_41_option').click();
+   };
+</script>
 </body>
 </html>

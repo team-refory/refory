@@ -12,7 +12,7 @@ require_once('security.php');
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>mypage</title>
+    <title>書きかけ一覧</title>
     <link href="css/profile.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="shortcut icon" href="img/favicon.ico" />
 </head>

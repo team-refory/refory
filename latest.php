@@ -107,6 +107,11 @@ function h($value) {
 
 </div>
 </div>
+<div id="next">
+
+        <a href="latest.php?page=<?php echo($page+1); ?>" class = "button">次の記事を表示！</a>
+        <img id="loading" src="/img/icon_loading.gif" alt="読み込み中"  width="29" height="29">
+</div>
 </div>
 <div class = "footer">
     <div class="footer_left">
@@ -114,6 +119,33 @@ function h($value) {
     </div>
         <p class="copylight">2016 © refory.jp</p>
 </div>
-
+<script>
+var maxpage = 99;
+/* global $ */
+$('#loading').css('display', 'none');
+$.autopager({
+    content: '#stories',// 読み込むコンテンツ
+    link: '#next a', // 次ページへのリンク
+    autoLoad: false,
+ 
+    start: function(current, next){
+      $('#loading').css('display', 'block');
+      $('#next a').css('display', 'none');
+    },
+ 
+    load: function(current, next){
+        $('#loading').css('display', 'none');
+        $('#next a').css('display', 'block');
+        if( current.page >= maxpage ){ //最後のページ
+            $('#next a').hide(); //次ページのリンクを隠す
+        }
+    }
+});
+ 
+$('#next a').click(function(){ // 次ページへのリンクボタン
+    $.autopager('load'); // 次ページを読み込む
+    return false;
+});
+</script>
 </body>
 </html>

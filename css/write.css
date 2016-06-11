@@ -15,10 +15,35 @@ body {
 	font-family:HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
 	background-color:#e3f9e3;
 	height:100%;
+	/* 画像ファイルの指定 */
+    background-image: url(../img/write_back.jpg);
+       
+      /* 画像を常に天地左右の中央に配置 */
+    background-position: center center;
+       
+      /* 画像をタイル状に繰り返し表示しない */
+    background-repeat: no-repeat;
+       
+      /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+    background-attachment: fixed;
+       
+      /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+    background-size: cover;
+       
+      /* 背景画像が読み込まれる前に表示される背景のカラー */
+    background-color: #464646;
 }
 body{
     background-color:#e3f9e3;
 }
+input{
+    border:none;
+    cursor:pointer;
+    padding:0;
+    -webkit-appearance: button;
+    *overflow: visible;
+}
+
 
 #header{
     position: fixed;
@@ -57,6 +82,11 @@ body{
     height:40px;
     display: inline-block;
     border-radius:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -khtml-border-radius: 5px;
     border: 3px solid rgba(255,255,255,0.6);
     background-size: cover;
     right:180px;
@@ -90,7 +120,187 @@ body{
 
 
 #wrap{
-    width:960px;
-    margin:auto;
     padding: 60px 0 0 0;
+}
+#container {
+    height: auto;
+}
+#container .white-board {
+    width: 960px;
+    margin:0 auto;
+    padding-top: 50px;
+}
+#container .white-board {
+    opacity: 0.9;
+}
+#container .white-board .post-title textarea {
+    width: 954px;
+    margin-bottom: 50px;
+    font-size: 24px;
+}
+.ckarticle .cke_toolgroup {
+    float: none;
+}
+#editorBottun {
+    float: left;
+    margin-left: -160px;
+    overflow: hidden;
+}
+#decoBold {
+    font-family: HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    box-shadow: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #0cc3a7;
+    text-decoration: none;
+    color: #fff;
+}
+#decoH3 {
+    display: none;
+    border-radius: 3px;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+#decoStrike {
+    font-family: HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    box-shadow: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #0cc3a7;
+    text-decoration: none;
+    color: #fff;
+}
+#cke_13 {
+    display: none;
+}
+
+#cke_14 {
+    display: none;
+}
+
+#cke_15 {
+    display: none;
+}
+#cke_1_top {
+    border-bottom: none;
+    padding: 0;
+    white-space: normal;
+    box-shadow: none;
+    background: #ffffff;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#f5f5f5',endColorstr='#cfd1cf');
+}
+
+#cke_1_bottom {
+    border-top: none;
+    padding: 0;
+    white-space: normal;
+    box-shadow: none;
+    background: #ffffff;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#f5f5f5',endColorstr='#cfd1cf');
+}
+.mypage {
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 15px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+.save_button {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #0cc3a7 ;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+.update_button {
+    padding: 11px 42px;
+    cursor: pointer;
+    background-color: #0cc3a7;
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+.release_button {
+    padding: 11px 42px;
+    cursor: pointer;
+    background-color: #0cc3a7;
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+
+.footer{
+    width:100%;
+    min-width:760px;
+    height:100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    -webkit-transition: height 0.4s ease-in-out;
+    -moz-transition: height 0.4s ease-in-out;
+    -o-transition: height 0.4s ease-in-out;
+    transition: height 0.4s ease-in-out;
+    -webkit-box-shadow: 0px -1px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px -1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0px -1px 2px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.footer .function-area ul {
+    font-size: 0;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-left: 0;
+}
+
+.footer .function-area li {
+    display: inline-block;
+    font-size: 12px;
+    width: 25%;
 }

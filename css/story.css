@@ -16,6 +16,19 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	background: transparent;
 	font-family:HiraKakuProN-W3, "Helvetica Neue", Helvetica, "メイリオ", Arial, sans-serif;
 }
+
+
+input{
+    border:none;
+    color:#078cc4;
+    text-decoration:underline;
+    background-color:#fff;
+    cursor:pointer;
+    padding:0;
+    -webkit-appearance: button;
+    *overflow: visible;
+}
+
 html {
     height:100%;
 }
@@ -86,6 +99,11 @@ body{
     height:68px;
     /*padding: 20px 5px 10px 15px;*/
     border-radius:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -khtml-border-radius: 50%;
     border: 3px solid rgba(255,255,255,0.6);
     background-size: cover;
     margin-top: 30px;
@@ -126,6 +144,11 @@ body{
     height:40px;
     display: inline-block;
     border-radius:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -khtml-border-radius: 50%;
     border: 3px solid rgba(255,255,255,0.6);
     background-size: cover;
     right:180px;
@@ -173,6 +196,11 @@ body{
     height:40px;
     display: inline-block;
     border-radius:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -khtml-border-radius: 50%;
     border: 3px solid rgba(255,255,255,0.6);
     background-size: cover;
     right:180px;
@@ -211,6 +239,10 @@ body{
     float: left;
     background-color: #fff;
     padding: 0 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
 }
 
 #side{
@@ -334,6 +366,11 @@ h3{
 	padding:10px;
 	color:#fff;
 	border-radius:6px;
+	-webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius:6px;
+    -ms-border-radius: 6px;
+    -khtml-border-radius: 6px;
 	text-align:center;
 	text-decoration: none;
 	text-shadow:1px 1px 0 rgba(255,255,255,0.3);
@@ -372,6 +409,8 @@ h3{
 .count_pv{
     display: none;
 }
+
+/* コメント */
 .comment_list_area {
     height: 200px;
 }
@@ -379,72 +418,110 @@ h3{
     margin: 0 auto;
     width: 990px;
     min-height: 40px;
-    clear: both;
-    content: "";
-    display: table;
+    
 }
-.comment_list_area .comment_list {
-    float: left;
-    padding: 10px 15px 20px 15px;
-    width: 517px;
-    min-height: 36px;
-    border: 1px solid rgba(0,0,0,0.11);
-    position: relative;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -o-border-radius: 3px;
-    -ms-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-background-clip: padding;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    background-color: #fff;
-    -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    -moz-box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0,0,0,0.05)), color-stop(100%, rgba(255,255,255,0.05)));
-    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: linear-gradient(bottom, rgba(0,0,0,0.05) 0%,rgba(255,255,255,0.05) 100%);
-}
+
 #comment_area {
-    height: 200px;
+    width:720px;
+    float: left;
+    margin: 10px 0px 10px 0px;
 }
-#comment_area .refory_story_comment {
+
+#comment_area .comments_wrapper .comment_list {
+    float: left;
+    padding: 10px 0px 20px 0px;
+    margin: 5px 0px 5px 0px;
+    width: 720px;
+    min-height: 36px;
+    background: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    
+}
+#comment_area .comments_wrapper .comment_list .user_comment .delete {
+    cursor: pointer;
+    float: right;
+}
+
+
+.comments_wrapper .comment_list .user_info {
+    width: 150px;
+    height: 60px;
+    float: left;
+    padding-left: 10px;
+    clear: both;
+    content: "";
+    display: table;
     margin: 0 auto;
-    width: 990px;
-    min-height: 40px;
+}
+
+.comments_wrapper .user_image {
+    width: 50px;
+    float: left;
+    margin-left: 20px;
+}
+.comments_wrapper .comment_list .user_comment {
+    padding-left: 120px;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+
+.comments_wrapper .comment_list .user_image img{
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.6);
+    background-size: cover;
+    right: 180px;
+    top: 6px;
+    vertical-align: middle;
+}
+.comments_wrapper .comment_list .user_info .user_name {
+    font-size: 15px;
+    color: #4A4A4A;
+    float: left;
+}
+#comment_form .new_post_wrapper {
+    padding: 20px 20px 20px 50px;
+    margin: 10px 0px 5px 0px;
+    width: 540px;
+    min-height: 36px;
+    height: auto;
+    position: relative;
+    top: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50), inset 0px 1px 3px 0px rgba(0,0,0,0.50);
     clear: both;
     content: "";
     display: table;
 }
-#comment_area .comment_contents {
-    float: left;
-    padding: 10px 15px 20px 15px;
-    width: 517px;
-    min-height: 36px;
-    border: 1px solid rgba(0,0,0,0.11);
-    position: relative;
+
+#comment_form .new_post_wrapper textarea {
+    width: 500px;
+}
+
+#comment_form .new_post_wrapper .new_post_content {
+    width: 500px;
+}
+#comment_form .new_post_wrapper #send-comment {
+    float:right;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #0cc3a7;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -o-border-radius: 3px;
     -ms-border-radius: 3px;
     -khtml-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-background-clip: padding;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    background-color: #fff;
-    -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    -moz-box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    box-shadow: 0 0 7px rgba(0,0,0,0.06);
-    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0,0,0,0.05)), color-stop(100%, rgba(255,255,255,0.05)));
-    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%);
-    background-image: linear-gradient(bottom, rgba(0,0,0,0.05) 0%,rgba(255,255,255,0.05) 100%);
 }
 textarea.comment {
     width: 500px

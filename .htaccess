@@ -1,4 +1,4 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule story/([0-9A-Za-z]+)\.php/?$ https://refory-dev-harubuta.c9users.io/stories/story.php?story_id=$1 [L]
+RewriteRule story/([0-9A-Za-z]+)\.php/?$ https://refory.jp/stories/story.php?story_id=$1 [L]
 </IfModule>

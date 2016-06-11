@@ -19,23 +19,28 @@ function sendComment() {
         alert("ログインをして下さい。");
         return false;
     }
-    
     $.post(
         'comment_insert.php',
         {
             'task' : "comment_insert",
             'story_id' : $('.comment_story_id').val(),
             'content': $('.comment_insert_text').val()
-        },
-        function(data){
-            // 書き込みが完了したら再度コメント一覧を読み込む
-            getComment();
-            $('.comment_insert_text').val(null);
         }
-    );
+        ).success( 
+            function(data) {
+            // 書き込みが完了したら再度コメント一覧を読み込む
+                getComment();
+                $('.comment_insert_text').val(null);
+            }
+        ).error(
+			function () {
+				console.log( "ERROR" );
+			}
+		);
 }
 // コメント一覧受信・表示
 function getComment() {
+  $('.new_post_wrapper').css('display', 'table');
     $.post(
         'get_comments.php',
         {

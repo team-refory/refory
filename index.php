@@ -97,7 +97,7 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 
     <div  id="contents">
     <!-- 新着記事の表示 -->
-    <h2 class = "headline">新着ストーリー</h2>
+    <h2 class = "headline">★新着ストーリー</h2>
     
         <div id="stories">
         <?php
@@ -127,7 +127,6 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 
             <a href="latest.php?page=<?php echo($page+1); ?>" class = "button">次の記事を表示！</a>
             <img id="loading" src="/img/icon_loading.gif" alt="読み込み中"  width="29" height="29">
-        </div>
     </div>
 </div>  
         
