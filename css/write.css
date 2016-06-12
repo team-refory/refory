@@ -35,6 +35,7 @@ body {
 }
 body{
     background-color:#e3f9e3;
+    
 }
 input{
     border:none;
@@ -43,7 +44,10 @@ input{
     -webkit-appearance: button;
     *overflow: visible;
 }
-
+textarea{
+    border:none;
+    padding: 0;
+}
 
 #header{
     position: fixed;
@@ -133,14 +137,19 @@ input{
 #container .white-board {
     opacity: 0.9;
 }
+#container .white-board .post-title{
+    height: 50px;
+}
 #container .white-board .post-title textarea {
-    width: 954px;
+    width: 959px;
     margin-bottom: 50px;
     font-size: 24px;
+    padding-bottom: 3px;
 }
 .ckarticle .cke_toolgroup {
     float: none;
 }
+
 #editorBottun {
     float: left;
     margin-left: -160px;

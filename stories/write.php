@@ -85,10 +85,11 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
     ,['CreatePlaceholder']
     ];
     CKEDITOR.config.height = '500px';
-    CKEDITOR.config.placeholder = 'Type here...';
-    CKEDITOR.replace( '.ckeditor', {
-			extraPlugins: 'placeholder'
-			});
+    CKEDITOR.config.extraPlugins='confighelper';
+    CKEDITOR.replace( 'ckeditor', {
+	extraPlugins : 'confighelper',
+	extraPlugins: 'placeholder'
+    });
     </script>
 
 
@@ -137,6 +138,7 @@ a {
                    <li><input type="button" id="decoH3" value="見出し"/></li>
                 </ul>
             </form>
+            
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="post-title">
                     <textarea name="title" placeholder="タイトル..." style="overflow: hidden; word-wrap: break-word; resize: none;" ><?php if (!empty($writing_title)): ?><?php echo $writing_title; ?><?php endif; ?></textarea>
@@ -156,7 +158,7 @@ a {
         
     
             <form action="" method="post" id="testForm" onsubmit="">
-            <textarea name="ckeditor" class="ckeditor" ><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
+            <textarea name="ckeditor" id= "ckeditor" class="ckeditor" placeholder = "あなたの失敗談をここに入力..."><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
             
         </div>
     
