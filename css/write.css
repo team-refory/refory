@@ -101,7 +101,7 @@ textarea{
 #header_right .write .write{
     float: right;
     padding: 10px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     margin: 7.5px 10px 15px 10px;
     text-decoration: none;
     color: #fff;
@@ -168,7 +168,7 @@ textarea{
     box-shadow: none;
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #0cc3a7;
+    background-color: #339933;
     text-decoration: none;
     color: #fff;
 }
@@ -191,7 +191,7 @@ textarea{
     box-shadow: none;
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #0cc3a7;
+    background-color: #339933;
     text-decoration: none;
     color: #fff;
 }
@@ -242,9 +242,23 @@ textarea{
     padding: 10px;
     cursor: pointer;
     font-size: 15px;
-    background-color: #0cc3a7 ;
+    background-color: #339933 ;
     text-decoration: none;
     color: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+.delete_button {
+    padding: 11px 42px;
+    cursor: pointer;
+    background-color: #d3d3d3;
+    font-size: 15px;
+    text-decoration: none;
+    color: #000000;
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -255,7 +269,7 @@ textarea{
 .update_button {
     padding: 11px 42px;
     cursor: pointer;
-    background-color: #0cc3a7;
+    background-color: #339933;
     font-size: 15px;
     text-decoration: none;
     color: #fff;
@@ -269,7 +283,7 @@ textarea{
 .release_button {
     padding: 11px 42px;
     cursor: pointer;
-    background-color: #0cc3a7;
+    background-color: #339933;
     font-size: 15px;
     text-decoration: none;
     color: #fff;
@@ -311,5 +325,5 @@ textarea{
 .footer .function-area li {
     display: inline-block;
     font-size: 12px;
-    width: 25%;
+    width: 20%;
 }

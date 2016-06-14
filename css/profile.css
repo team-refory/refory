@@ -100,7 +100,7 @@ a{
 #write{
     float: right;
     padding: 10px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     margin: 7.5px 10px 15px 10px;
     text-decoration: none;
     color: #fff;
@@ -146,7 +146,7 @@ a{
     -o-border-radius: 3px;
     -ms-border-radius: 3px;
     -khtml-border-radius: 3px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     margin: 0 0 0 30px;
     text-decoration: none;
     color: #fff;
@@ -233,7 +233,7 @@ a{
 #header_right .write .write{
     float: right;
     padding: 10px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     margin: 7.5px 10px 15px 10px;
     text-decoration: none;
     color: #fff;

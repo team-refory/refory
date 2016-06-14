@@ -17,7 +17,7 @@ $url = ($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
 <ul class="clearfix">
 <!--ツイートボタン-->
 <li class="twitter">
-<a target = "_blank" href="http://twitter.com/intent/tweet?url=<?php echo urlencode($url); ?>&text=<?php echo $story_data['title']; ?>【refory.jp】"><i class="fa fa-twitter"></i><img alt="ツイッターボタン" src="img/twitter.png"><p>Twitter</p></a>
+<a target = "_blank" href="http://twitter.com/intent/tweet?url=<?php echo urlencode($url); ?>&text=<?php echo $story_data['title']; ?>【refory.jp】" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"><i class="fa fa-twitter"></i><img alt="ツイッターボタン" src="img/twitter.png"><p>Twitter</p></a>
 </li>
 
 <!--Facebookボタン-->
@@ -27,7 +27,7 @@ $url = ($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
 
 <!--はてブボタン-->
 <li class="hatebu">
-<a href="http://b.hatena.ne.jp/add?mode=confirm&url=<?php echo $url; ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=510');return false;" ><i class="fa fa-hatena"></i><img alt="はてぶボタン" src="img/hatebu.png"><p>はてブ</p></a>
+<a href="http://b.hatena.ne.jp/add?mode=confirm&url=https://<?php echo $url; ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=510');return false;" ><i class="fa fa-hatena"></i><img alt="はてぶボタン" src="img/hatebu.png"><p>はてブ</p></a>
 </li>
 
 </ul>

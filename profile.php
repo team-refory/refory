@@ -5,7 +5,14 @@ require_once('login/fblogin.php');
 require_once('editer.php');
 require_once('security.php');
 
-
+// if (!empty($_POST)) {
+//     if ($_POST['action'] == '削除'){
+//                 $sql = sprintf('DELETE FROM stories WHERE story_id=%d',
+//                               $written_story['story_id']
+//                               );
+//         mysqli_query($db, $sql) or die(mysqli_error($db));
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +56,26 @@ require_once('security.php');
         <?php
         while($written_story = mysqli_fetch_assoc($written_stories)):
         ?>
+        <!--<form action="profile.php" method="post">-->
         <a href="stories/story.php?story_id=<?php echo $written_story['story_id']; ?>">
         <h2><?php echo h($written_story['title']); ?></h2>
         <!-- <p><?php echo h($written_story['thumbnail']); ?></p> -->
         </a>
         <a class="edit" href="stories/write.php?story_id=<?php echo $written_story['story_id']; ?>&id=<?php echo $user_profile['id']; ?>">編集</a>
+        <!--<form action="" method=post>-->
+        <!--    <input type=hidden name="story_id" value=<?php $written_story['story_id']; ?>>-->
+        <!--    <input type="submit" id="delete-story" value="削除" />-->
+        <!--</form>-->
+        <?php
+            
+        	if (!empty($_POST)) {
+            
+                        $sql = sprintf('DELETE FROM stories WHERE story_id=%d',
+                                       $written_story['story_id']
+                                      );
+                mysqli_query($db, $sql) or die(mysqli_error($db));
+            }
+        ?>
         <?php
         endwhile;
         ?>
@@ -67,11 +89,15 @@ require_once('security.php');
         <h2><?php echo h($writing_story['title']); ?></h2>
         <!-- <p><?php echo h($writing_story['thumbnail']); ?></p> -->
         </a>
+        <!--一旦保留-->
+        <!--<textarea class="story_id" style="display: block;"><?php echo h($writing_story['story_id']); ?></textarea>-->
+        <!--<input type="button" id="delete-story" value="削除" />-->
         <?php
         endwhile;
         ?>
         </div>
     <a href="index.php">TOPへ戻る</a>
 </div>
+
 </body>
 </html>

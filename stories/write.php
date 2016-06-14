@@ -84,7 +84,7 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
     ,['Format']
     ,['CreatePlaceholder']
     ];
-    CKEDITOR.config.height = '500px';
+    CKEDITOR.config.height = '400px';
     CKEDITOR.config.extraPlugins='confighelper';
     CKEDITOR.replace( 'ckeditor', {
 	extraPlugins : 'confighelper',
@@ -158,24 +158,28 @@ a {
         
     
             <form action="" method="post" id="testForm" onsubmit="">
-            <textarea name="ckeditor" id= "ckeditor" class="ckeditor" placeholder = "あなたの失敗談をここに入力..."><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
+            <textarea name="article" id= "ckeditor" class="ckeditor" placeholder = "あなたの失敗談をここに入力..."><?php if (!empty($writing_article)): ?><?php echo $writing_article; ?><?php endif; ?></textarea>
             
         </div>
     
             <div class = "footer">
                 <div class="function-area">
                     <ul style="list-style:none;">
-                        <!--<li><input type="submit" class="release_button" name="action" value="削除" /></li>-->
-                        <li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>
-                        <li><input type="submit" class="save_button" name="action" value="下書きを保存" /></li>
+                        
                     <?php
-                        if (preg_match("|^https?://refory\.jp\/profile\.php|", $referer)) {
+                        if (preg_match("|^https?://refory-dev-harubuta\.c9users\.io\/profile\.php|", $referer)) {
                            // マイページからの遷移した場合の処理
+                            echo '<li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>';
+                            echo '<li><input type="submit" class="delete_button" name="action" value="削除" onClick="disp()" /></li>';
+                            echo '<li><input type="submit" class="save_button" name="action" value="下書きを保存" /></li>';
                             echo '<li><input type="submit" class="update_button" name="action" value="更新" /></li>';
                             echo '<li><input type="submit" class="release_button" name="action" value="公開" /></li>';
+                            
                         }
                         else {
                          /* 直接アクセス時の処理 */
+                         echo '<li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>';
+                         echo '<li><input type="submit" class="save_button" name="action" value="下書きを保存" /></li>';
                          echo '<li><input type="submit" class="release_button" name="action" value="公開" /></li>';
                         }
                     ?>
@@ -196,6 +200,30 @@ a {
    document.getElementById('decoH3').onclick = function(){
        document.getElementById('cke_41_option').click();
    };
+</script>
+<script type="text/javascript">
+
+function disp(){
+
+	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	if(window.confirm('削除してもよろしいでしょうか？')){
+
+		location.href = "profile.php"; // example_confirm.html へジャンプ
+
+	}
+	// 「OK」時の処理終了
+
+	// 「キャンセル」時の処理開始
+	else{
+
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+
+	}
+	// 「キャンセル」時の処理終了
+
+}
+
+// -->
 </script>
 </body>
 </html>
