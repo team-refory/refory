@@ -141,10 +141,11 @@ textarea{
     height: 50px;
 }
 #container .white-board .post-title textarea {
-    width: 959px;
+    width: 958px;
     margin-bottom: 50px;
     font-size: 24px;
     padding-bottom: 3px;
+    border: 1px solid #b6b6b6;
 }
 .ckarticle .cke_toolgroup {
     float: none;
@@ -194,6 +195,11 @@ textarea{
     background-color: #339933;
     text-decoration: none;
     color: #fff;
+}
+
+
+#cke_12 {
+    display: none;
 }
 #cke_13 {
     display: none;
