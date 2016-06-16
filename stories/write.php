@@ -225,7 +225,7 @@ function submit(){
 	// 「キャンセル」時の処理開始
 	else{
 
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
+	window.alert('キャンセルされました'); // 警告ダイアログを表示
          this.location.href="../profile.php";
          return false;
 	}
