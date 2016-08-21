@@ -82,7 +82,7 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
             <!--未ログインならログイン URL を取得してリンクを出力 -->
             <?php
             $loginUrl = $facebook->getLoginUrl();
-            echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+            echo '<a id="fb_login" href="' . $loginUrl . '"> Facebookログインして<br><span>あなたの失敗談を書こう</span></a>';
             }
         ?>
             </div>
@@ -90,12 +90,14 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
     
     </div>
 
-<div id="copy_img">
-    <img src="img/refory_copy.jpg">
+<div id="refory_img">
+    <div id="copy_img">
+        <img src="img/refory_top.png" class="logo_img">
+    </div>
 </div>
 <div id="wrap">
-
     <div  id="contents">
+        
     <!-- 新着記事の表示 -->
     <h2 class = "headline">★新着ストーリー</h2>
     
@@ -133,7 +135,7 @@ $stories = mysqli_query($db, $sql) or die(mysqli_error($db));
 
 <div class = "footer">
     <div class="footer_left">
-        <a href="inde.php"><img src="img/refory_logo.png"></a>
+        <a href="inde.php"><img src="img/logo-width.png" alt="refory" class="refory_logo_new"></a>
     </div>
         <p class="copylight">2016 © refory.jp</p>
 </div>

@@ -16,7 +16,7 @@ $comments = mysqli_query($db, $sql) or die(mysqli_error($db));
         echo '<div class="comment_list">';
         echo '<textarea class="comment_id" style="display: none;">'.h($comment_list['comment_id']).'</textarea>';
     	echo '<div class="user_info">';
-    	echo '<div class="user_image"><a href="../profile.php"><img src="https://graph.facebook.com/' . $comment_list['fb_id'] . '/picture?type=normal"> </a></div>';
+    	echo '<div class="user_image"><img src="https://graph.facebook.com/' . $comment_list['fb_id'] . '/picture?type=normal"> </a></div>';
     	echo '<div class="user_name">'.h($comment_list['name']).'</div>';
     	echo '</div>';
     	echo '<div class="user_comment">';

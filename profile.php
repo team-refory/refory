@@ -42,7 +42,7 @@ require_once('security.php');
             <!--未ログインならログイン URL を取得してリンクを出力 -->
             <?php
             $loginUrl = $facebook->getLoginUrl();
-            echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+            echo '<a id="fb_login" href="' . $loginUrl . '"> Facebookログインして<br><span>あなたの失敗談を書こう</span></a>';
             }
         ?>
             </div>
@@ -96,7 +96,7 @@ require_once('security.php');
         endwhile;
         ?>
         </div>
-    <a href="index.php">TOPへ戻る</a>
+    <a href="index.php">ホームへ戻る</a>
 </div>
 
 </body>

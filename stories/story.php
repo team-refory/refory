@@ -45,6 +45,7 @@ $count = $counter->log( $story_id );
     <title>記事ページ</title>
     <link href="../css/story.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="shortcut icon" href="../img/favicon.ico" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1" />
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -77,7 +78,7 @@ $count = $counter->log( $story_id );
                 <!--未ログインならログイン URL を取得してリンクを出力 -->
                 <?php
                 $loginUrl = $facebook->getLoginUrl();
-                echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+                echo '<a id="fb_login" href="' . $loginUrl . '"> Facebookログインして<br><span>あなたの失敗談を書こう</span></a>';
                 }
             ?>
             </div>
@@ -90,6 +91,10 @@ $count = $counter->log( $story_id );
     <?php include '../sns.php' ; ?>
     <div id="story">
         <h1><?php echo h($story_data['title']); ?></h1>
+            <div id="profile-mobile">
+                <p id="fb_img"><?php echo '<img src="https://graph.facebook.com/' . $story_data['fb_id'] . '/picture">'; ?></p>
+                <p id="name">by&nbsp;&nbsp;<?php echo h($story_data['name']); ?></p>
+            </div>
         <!-- <p><?php echo ('<img src="../img/' . $story_data['thumbnail'] . '" />'); ?></p> -->
         <p><?php echo $story_data['article']; ?></p>
     </div>
@@ -101,18 +106,18 @@ $count = $counter->log( $story_id );
             <!--<p><?php echo h($story_data['introduce']); ?></p>-->
         </div>
             <h3>この人の他の失敗談</h3>
-            <div class="samewriter_stories">
+            <ul class="samewriter_stories">
                 <?php
                     while($stories = mysqli_fetch_assoc($samewriter_stories)):
                 ?>
-                <a class="samewriter_story" href="story.php?story_id=<?php echo $stories['story_id']; ?>">
+                <li class="writer_story"><a href="story.php?story_id=<?php echo $stories['story_id']; ?>" class="writer_story_inner">
                 <p><?php echo mb_strimwidth($stories['title'], 0, 55, '...', 'UTF-8'); ?></p>
                 <!-- <p><?php echo h($stories['thumbnail']); ?></p> -->
-                </a>
+                </a></li>
                 <?php
                     endwhile;
                 ?>
-            </div>
+            </ul>
             <h3>新着の失敗談</h3>
             <div class="latest_stories">
                 <?php
@@ -126,9 +131,7 @@ $count = $counter->log( $story_id );
                     endwhile;
                 ?>
             </div>
-            <!--<div class = 'count_pv'>-->
-            <!--    <iframe src="../count/count.php" height="70" width="140" frameborder="0" scrolling="no"></iframe>-->
-            <!--</div>-->
+            
     </div>
         <div id="comment_area">
             
@@ -149,12 +152,12 @@ $count = $counter->log( $story_id );
         	
         </div>
     </div>
-     
+     <a href="" onclick="scrollToTop(); return false" id="scroll-to-top" class="scroll-to-top-not-display">▲</a>
     
 </div>
 <div class = "footer">
     <div class="footer_left">
-        <a href="../index.php"><img src="../img/refory_logo.png"></a>
+        <a href="../index.php"><img src="../img/logo-width.png" alt="refory" class="refory_logo_new"></a>
     </div>
         <p class="copylight">2016 © refory.jp</p>
 </div>
@@ -164,5 +167,44 @@ $count = $counter->log( $story_id );
 <script type="text/javascript" src="js/comment.js"></script>
 <script type="text/javascript" src="js/autoResize.js"></script>
 <script type="text/javascript" src="js/count.js"></script>
+<script >
+function scrollToTop() {
+  var x1 = x2 = x3 = 0;
+  var y1 = y2 = y3 = 0;
+  if (document.documentElement) {
+    x1 = document.documentElement.scrollLeft || 0;
+    y1 = document.documentElement.scrollTop || 0;
+  }
+  if (document.body) {
+    x2 = document.body.scrollLeft || 0;
+    y2 = document.body.scrollTop || 0;
+  }
+  x3 = window.scrollX || 0;
+  y3 = window.scrollY || 0;
+  var x = Math.max(x1, Math.max(x2, x3));
+  var y = Math.max(y1, Math.max(y2, y3));
+  window.scrollTo(Math.floor(x / 2), Math.floor(y / 2));
+  if (x > 0 || y > 0) {
+    window.setTimeout("scrollToTop()", 30);
+  }
+}
+</script>
+<script>
+    var element = null;
+window.onscroll = function() {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    if (element == null) {
+      element = document.getElementById('scroll-to-top');
+    }
+    if (scrollTop / scrollHeight > 0.1) {
+      element.classList.remove('scroll-to-top-not-display');
+    } else {
+      element.classList.add('scroll-to-top-not-display');
+    }
+}
+</script>
+
+
 </body>
 </html>

@@ -117,9 +117,12 @@ textarea{
     float: right;
     padding: 10px;
     background-color: #305097 ;
-    margin: 7.5px 10px 15px 10px;
+    margin: 0px 10px 0px 10px;
     text-decoration: none;
     color: #fff;
+    border-radius: 3px;
+    height: 30px;
+    width: 183px;
 }
 
 

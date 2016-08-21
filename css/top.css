@@ -68,27 +68,35 @@ a{
 }
 
 #header_left{
-    float: left;
+    margin: 0 auto;
+    width: 179px;
     padding: 0;
+    padding-left: 56px;
 }
 
 #header_right{
     display:none;
 }
 .refory_logo_new{
-    width: 179px;
-    height: 54px;
-    float: left;
-    margin-left: 70px;
-}
-#copy_img{
-    width:100%;
-    height:auto;
-    margin:auto;
+    width: 125.3px;
+    height: 37.8px;
+    margin: 0 auto;
+    
 }
 
-#copy_img img{
-    width:100%;
+#refory_img {
+    width: 100%;
+    display: block;
+}
+
+#refory_img #copy_img{
+    height:auto;
+
+}
+
+#refory_img #copy_img .logo_img{
+    margin:0 auto;
+    width: 100%;
     height:auto;
     margin-bottom: -2px;
 }
@@ -98,7 +106,7 @@ a{
     text-align: center;
     height: 40px;
     padding-top: 20px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     text-decoration: none;
     color: #fff;
 }
@@ -134,7 +142,9 @@ a{
     width: 130px;
     height:170px;
 }
-
+.story {
+    height: 200px;
+}
 .story.text{
     float: right;
     width: 330px;
@@ -212,7 +222,7 @@ a{
     -o-border-radius: 1000px;
     -ms-border-radius: 1000px;
     -khtml-border-radius: 1000px;
-    background-color: #ff7200;
+    background-color: #339933;
     border-color: #cf5d02;
     color: #fff !important;
     font-weight: 700 !important;
@@ -246,6 +256,7 @@ a{
     margin: 3px;
     width:213px;
     display:block;
+    
 }
 #header_right .fb_img-header {
     width: 49px;
@@ -269,7 +280,7 @@ a{
     top:6px;
     vertical-align:middle;
 }
-.refory_logo_new{
+.refory_logo_new {
     width: 179px;
     height: 54px;
     float: left;
@@ -279,14 +290,19 @@ a{
     float: right;
     padding: 10px;
     background-color: #305097 ;
-    margin: 7.5px 10px 15px 10px;
+    margin: 0px 10px 0px 10px;
     text-decoration: none;
     color: #fff;
+    border-radius: 3px;
+    height: 30px;
+    width: 183px;
+    
 }
+
 #header_right .write .write{
     float: right;
     padding: 10px;
-    background-color: #0cc3a7;
+    background-color: #339933;
     margin: 7.5px 10px 15px 10px;
     text-decoration: none;
     color: #fff;
@@ -297,9 +313,8 @@ a{
     -ms-border-radius: 3px;
     -khtml-border-radius: 3px;
 }
-#copy_img{
+#refory_img #copy_img{
     clear: both;
-    width:100%;
     height:auto;
     margin:auto;
     padding: 60px 0 0 0;
@@ -335,7 +350,7 @@ a{
     margin-left: 10px;
     text-align: left;
     padding: 0;
-    background-color: initial;
+    background-color: transparent;
     height: 20px;
 }
 
@@ -410,7 +425,7 @@ a{
 #next .button {
     margin: 0;
     border-radius: 1000px;
-    background-color: #ff7200;
+    background-color: #339933;
     border-color: #cf5d02;
     color: #fff !important;
     font-weight: 700 !important;

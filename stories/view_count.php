@@ -72,6 +72,13 @@ class ViewCounter
         if($num > 0){
             $count = $count + $num;
             file_put_contents( $file, $count, LOCK_EX );
+            $db = mysqli_connect('localhost', 'harubuta', '' , 'refory') or die(mysqli_connect_error());
+            mysqli_set_charset($db, 'utf8');
+            $sql = sprintf('INSERT INTO views SET story_id=%d,views="%d",created=NOW(), published=NOW()',
+                              $story_id,
+                              $count
+                              );
+            mysqli_query($db, $sql) or die(mysqli_error($db));
             
         }
         return $count;
@@ -81,14 +88,7 @@ class ViewCounter
     function get_count($story_id){
         $count = $this->count_up($story_id, 0);
         return $count;
-        // $db = mysqli_connect('localhost', 'harubuta', '' , 'refory') or die(mysqli_connect_error());
-        //     mysqli_set_charset($db, 'utf8');
-        //     $sql = sprintf('INSERT INTO views SET story_id=%d,views="%d",created=NOW(), published=NOW()',
-        //                       $story_id,
-        //                       $count
-        //                       );
-        //     var_dump($sql);
-        //     mysqli_query($db, $sql) or die(mysqli_error($db));
+        
         
     }
 }

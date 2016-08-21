@@ -17,7 +17,7 @@ $(document).ready(function(){
 	//カウンター＋1追加処理
 	$('#btn01 p').click(function(e){
 		//「param1」変数の値と書き込みファイル名の情報をもってpost.phpへ。その後、関数func01を実行
-		$.post("like_count.php" , {"param1": 'count01.txt'} , func01);
+		$.post("post.php" , {"param1": 'count01.txt'} , func01);
 		$("#btn01 span").load("./count01.txt");
 	});
 

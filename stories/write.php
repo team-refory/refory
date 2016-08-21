@@ -87,10 +87,10 @@ if (!empty($_POST)) {  //フォームから送信されたかの確認
     CKEDITOR.config.height = '400px';
     CKEDITOR.config.extraPlugins='confighelper';
     // CKEDITOR.config.extraPlugins='autogrow';
-    // CKEDITOR.config.autogrow_minHeight='400px';
-    // CKEDITOR.config.autogrow_maxHeight='500px';
-    // CKEDITOR.config.resize_minHeight = '400px';
-    // CKEDITOR.config.resize_maxHeight = '500px';
+    CKEDITOR.config.autogrow_minHeight='400px';
+    CKEDITOR.config.autogrow_maxHeight='500px';
+    CKEDITOR.config.resize_minHeight = '400px';
+    CKEDITOR.config.resize_maxHeight = '500px';
     CKEDITOR.replace( 'ckeditor', {
 	extraPlugins : 'confighelper',
 	extraPlugins: 'placeholder',
@@ -130,7 +130,7 @@ a {
                 <!--未ログインならログイン URL を取得してリンクを出力 -->
                 <?php
                 $loginUrl = $facebook->getLoginUrl();
-                echo '<a id="fb_login" href="' . $loginUrl . '">facebook でログイン</a>';
+                echo '<a id="fb_login" href="' . $loginUrl . '"> Facebookログインして<br><span>あなたの失敗談を書こう</span></a>';
                 }
             ?>
             </div>
@@ -180,7 +180,7 @@ a {
                         if (preg_match("|^https?://refory-dev-harubuta\.c9users\.io\/profile\.php|", $referer)) {
                            // マイページからの遷移した場合の処理
                             echo '<li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>';
-                            echo '<li><input type="submit" class="delete_button" name="action" value="削除" onClick=" return submit();" /></li>';
+                            echo '<li><input type="submit" class="delete_button" name="action" value="削除" onClick="return submit();" /></li>';
                             echo '<li><input type="submit" class="save_button" name="action" value="下書き保存" /></li>';
                             echo '<li><input type="submit" class="update_button" name="action" value="更新" /></li>';
                             echo '<li><input type="submit" class="release_button" name="action" value="公開" /></li>';
@@ -217,9 +217,9 @@ function submit(){
 
 	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
 	if(window.confirm('削除してもよろしいでしょうか？')){
-        return true;
-		this.location.href = "../profile.php"; // example_confirm.html へジャンプ
         
+		this.location.href = "../profile.php"; // example_confirm.html へジャンプ
+        return true;
 	}
 
 	// 「キャンセル」時の処理開始
