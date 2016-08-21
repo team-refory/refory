@@ -177,7 +177,7 @@ a {
                     <ul style="list-style:none;">
                         
                     <?php
-                        if (preg_match("|^https?://refory-dev-harubuta\.c9users\.io\/profile\.php|", $referer)) {
+                        if (preg_match("|^https?://refory\.jp\/profile\.php|", $referer)) {
                            // マイページからの遷移した場合の処理
                             echo '<li><a href="../profile.php" class = "mypage">書きかけ一覧</a></li>';
                             echo '<li><input type="submit" class="delete_button" name="action" value="削除" onClick="return submit();" /></li>';
@@ -225,7 +225,7 @@ function submit(){
 	// 「キャンセル」時の処理開始
 	else{
 
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
+	window.alert('キャンセルされました'); // 警告ダイアログを表示
          this.location.href="../profile.php";
          return false;
 	}
